@@ -16,11 +16,16 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        #legend { position: absolute; bottom: 0; left: 0; font-family: sans-serif;}
+        #legend div { display: inline-block; padding: 5px; margin: 0; }
     </style>
 </head>
 <body>
 
 <div id='map'></div>
+<div id="legend">
+    <div style="color: white;">km/h:</div><div style="background: hsl(0, 100%, 50%)">0-10</div><div style="background: hsl(6, 100%, 50%)">10-20</div><div style="background: hsl(29, 100%, 50%)">20-30</div><div style="background: hsl(47, 38%, 50%)">30-40</div><div style="background: hsl(43, 100%, 50%)">40-50</div><div style="background: hsl(45, 100%, 50%)">50-60</div><div style="background: hsl(75, 100%, 50%)">60-70</div><div style="background: hsl(109, 100%, 50%)">70-80</div><div style="background: hsl(183, 100%, 50%)">90+</div>
+</div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidGVzbGFtb3RvcnMiLCJhIjoiM2M3NDdmMDE3NWIxMzljY2E5OGE3YTZlM2JiM2M3MTUifQ.E9PAKpZvfL3L55JIaJRKfw';
 var simple = {
@@ -122,7 +127,6 @@ var simple = {
             "tiles" : ["http://localhost:5000/tile/v1/driving/tile({x},{y},{z}).mvt"]
         }
     },
-    "sprite": "mapbox://sprites/danpat/cilsgijgn00aia2kq5fwdfl2v",
     "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
     "layers": [
         {
@@ -4278,6 +4282,69 @@ var simple = {
             "interactive": true
         },
         {
+            "minzoom": 12,
+            "layout": {
+                "visibility": "visible",
+                "line-cap": "round"
+            },
+            "metadata": {},
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "$type",
+                    "LineString"
+                ],
+                [
+                    "==",
+                    "is_small",
+                    true
+                ]
+            ],
+            "type": "line",
+            "source": "osrm",
+            "id": "speeds small components",
+            "paint": {
+                "line-width": {
+                    "base": 1.5,
+                    "stops": [
+                        [
+                            12.5,
+                            6
+                        ],
+                        [
+                            14,
+                            8
+                        ],
+                        [
+                            18,
+                            28
+                        ]
+                    ]
+                },
+                "line-color": "hsl(306, 100%, 100%)",
+                "line-offset": {
+                    "base": 1.5,
+                    "stops": [
+                        [
+                            12.5,
+                            0.25
+                        ],
+                        [
+                            14,
+                            1
+                        ],
+                        [
+                            18,
+                            9
+                        ]
+                    ]
+                }
+            },
+            "source-layer": "speeds",
+            "interactive": true
+        },
+        {
             "interactive": true,
             "minzoom": 12,
             "layout": {
@@ -4999,15 +5066,15 @@ var simple = {
                     ]
                 },
                 "text-allow-overlap": true,
-                "symbol-avoid-edges": false,
+                "symbol-avoid-edges": true,
                 "text-ignore-placement": true,
-                "symbol-spacing": 5,
+                "symbol-spacing": 250,
                 "text-font": [
                     "Arial Unicode MS Bold"
                 ],
                 "symbol-placement": "line",
                 "text-justify": "center",
-                "text-padding": 1,
+                "text-padding": 0,
                 "text-offset": [
                     0,
                     1
@@ -5026,6 +5093,71 @@ var simple = {
             "type": "symbol",
             "source": "osrm",
             "id": "speeds labels",
+            "paint": {
+                "text-color": "#9e0142",
+                "text-halo-width": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            10,
+                            10
+                        ],
+                        [
+                            18,
+                            13
+                        ]
+                    ]
+                },
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-blur": 0
+            },
+            "source-layer": "speeds",
+            "interactive": true
+        },
+        {
+            "minzoom": 12,
+            "layout": {
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            10,
+                            8
+                        ],
+                        [
+                            18,
+                            11
+                        ]
+                    ]
+                },
+                "text-allow-overlap": true,
+                "symbol-avoid-edges": true,
+                "text-ignore-placement": true,
+                "symbol-spacing": 250,
+                "text-font": [
+                    "Arial Unicode MS Bold"
+                ],
+                "symbol-placement": "line",
+                "text-justify": "center",
+                "text-padding": 0,
+                "text-offset": [
+                    0,
+                    2.5
+                ],
+                "text-rotation-alignment": "map",
+                "text-anchor": "center",
+                "text-keep-upright": false,
+                "text-field": "{duration} sec"
+            },
+            "metadata": {},
+            "filter": [
+                "==",
+                "$type",
+                "LineString"
+            ],
+            "type": "symbol",
+            "source": "osrm",
+            "id": "duration labels",
             "paint": {
                 "text-color": "hsl(0, 0%, 100%)",
                 "text-halo-width": {
@@ -5047,7 +5179,7 @@ var simple = {
             "source-layer": "speeds",
             "interactive": true
         }
-    ],
+   ],
     "created": "2016-03-14T20:42:54.687Z",
     "id": "cilsgijgn00aia2kq5fwdfl2v",
     "modified": "2016-03-14T21:49:49.761Z",
