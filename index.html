@@ -27,7 +27,7 @@
     <div style="color: white;">km/h:</div><div style="background: hsl(0, 100%, 50%)">0-10</div><div style="background: hsl(6, 100%, 50%)">10-20</div><div style="background: hsl(29, 100%, 50%)">20-30</div><div style="background: hsl(47, 38%, 50%)">30-40</div><div style="background: hsl(43, 100%, 50%)">40-50</div><div style="background: hsl(45, 100%, 50%)">50-60</div><div style="background: hsl(75, 100%, 50%)">60-70</div><div style="background: hsl(109, 100%, 50%)">70-80</div><div style="background: hsl(183, 100%, 50%)">90+</div>
 </div>
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoidGVzbGFtb3RvcnMiLCJhIjoiM2M3NDdmMDE3NWIxMzljY2E5OGE3YTZlM2JiM2M3MTUifQ.E9PAKpZvfL3L55JIaJRKfw';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGFucGF0IiwiYSI6ImNpcHIwOTBrMTA2am1meG5vdXE4eDN1aDkifQ.Ksnrtuh0LEJuFSVE-SlhxQ';
 var simple = {
     "version": 8,
     "name": "OSRM debug",
@@ -124,7 +124,7 @@ var simple = {
         },
         "osrm": {
             "type": "vector",
-            "tiles" : ["http://localhost:5000/tile/v1/driving/tile({x},{y},{z}).mvt"]
+            "tiles" : ["https://api-directions-tt-traffic-hd-internal.tilestream.net/v4/directions/teslamotors.driving/tiles/{z}/{x}/{y}.mvt?access_token=pk.eyJ1IjoiZGFucGF0IiwiYSI6ImNpcGZ4cTZraDAwMHRzcGx6bnJzZ2VncngifQ.8nHOBsTqZ7TRyCuuRAuGhQ"]
         }
     },
     "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
@@ -5082,7 +5082,7 @@ var simple = {
                 "text-rotation-alignment": "map",
                 "text-anchor": "center",
                 "text-keep-upright": false,
-                "text-field": "{speed} km/h ➜"
+                "text-field": "{datasource} ➜"
             },
             "metadata": {},
             "filter": [
