@@ -1,3 +1,7 @@
+**NOTICE**
+
+This project is abandoned.  This tool formed the basis of https://github.com/Project-OSRM/osrm-frontend/tree/gh-pages/debug, the official debug tile viewer for OSRM.
+
 # Tile viewer for OSRM
 
 OSRM, as of version 5.0, supports serving of Mapbox Vector Tiles to view the
